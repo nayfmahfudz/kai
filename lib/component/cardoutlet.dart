@@ -49,18 +49,20 @@ class _CardoutletState extends State<Cardoutlet> {
         child: Stack(
           children: [
             ListView(
+              physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: const EdgeInsets.fromLTRB(16, 16, 36, 16),
               children: [
                 Text(widget.outlet["name"] ?? "",
                     textAlign: TextAlign.left,
                     style: GoogleFonts.roboto(
-                      fontSize: 14,
+                      fontSize: 22,
                       color: biru,
                       fontWeight: FontWeight.w800,
                       textStyle: Theme.of(context).textTheme.subtitle1,
                     )),
                 ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(10),
                   children: [
@@ -68,20 +70,14 @@ class _CardoutletState extends State<Cardoutlet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          // child: Image.asset("assets/uang.png",
-                          //     height: 10, fit: BoxFit.contain),
-                        ),
                         Flexible(
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(6, 6, 6, 6),
-                            child: Text(
-                                'IDR    ......................................................................................',
+                            child: Text(widget.outlet["code"] ?? "",
                                 textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.roboto(
-                                  fontSize: 14,
+                                  fontSize: 17,
                                   color: biru,
                                   fontWeight: FontWeight.w800,
                                   textStyle:
@@ -89,14 +85,15 @@ class _CardoutletState extends State<Cardoutlet> {
                                 )),
                           ),
                         ),
+                        Expanded(child: SizedBox()),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(6, 6, 0, 6),
-                          child: Text('10.0000',
+                          child: Text('Menunggu',
                               textAlign: TextAlign.left,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.roboto(
                                 fontSize: 14,
-                                color: biru,
+                                color: Colors.green,
                                 fontWeight: FontWeight.w800,
                                 textStyle:
                                     Theme.of(context).textTheme.subtitle1,
@@ -116,8 +113,7 @@ class _CardoutletState extends State<Cardoutlet> {
                         Flexible(
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),
-                            child: Text(
-                                'USD    ......................................................................................',
+                            child: Text('',
                                 textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.roboto(
@@ -128,19 +124,6 @@ class _CardoutletState extends State<Cardoutlet> {
                                       Theme.of(context).textTheme.subtitle1,
                                 )),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(6, 6, 0, 6),
-                          child: Text('10.0000',
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.roboto(
-                                fontSize: 14,
-                                color: biru,
-                                fontWeight: FontWeight.w800,
-                                textStyle:
-                                    Theme.of(context).textTheme.subtitle1,
-                              )),
                         ),
                       ],
                     ),
@@ -156,31 +139,18 @@ class _CardoutletState extends State<Cardoutlet> {
                         Flexible(
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),
-                            child: Text(
-                                'EUR    ......................................................................................',
-                                textAlign: TextAlign.left,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  color: biru,
-                                  fontWeight: FontWeight.w800,
-                                  textStyle:
-                                      Theme.of(context).textTheme.subtitle1,
-                                )),
+                            child:
+                                Text(widget.outlet["carriage_type_name"] ?? "",
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: biru,
+                                      fontWeight: FontWeight.w800,
+                                      textStyle:
+                                          Theme.of(context).textTheme.subtitle1,
+                                    )),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(6, 6, 0, 6),
-                          child: Text('10.0000',
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.roboto(
-                                fontSize: 14,
-                                color: biru,
-                                fontWeight: FontWeight.w800,
-                                textStyle:
-                                    Theme.of(context).textTheme.subtitle1,
-                              )),
                         ),
                       ],
                     ),
@@ -192,35 +162,6 @@ class _CardoutletState extends State<Cardoutlet> {
                           padding: const EdgeInsets.only(top: 8),
                           // child: Image.asset("assets/uang.png",
                           //     height: 10, fit: BoxFit.contain),
-                        ),
-                        Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.all(6.0),
-                            child: Text(
-                                'SGD    ......................................................................................',
-                                textAlign: TextAlign.left,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  color: biru,
-                                  fontWeight: FontWeight.w800,
-                                  textStyle:
-                                      Theme.of(context).textTheme.subtitle1,
-                                )),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(6, 6, 0, 6),
-                          child: Text('10.0000',
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.roboto(
-                                fontSize: 14,
-                                color: biru,
-                                fontWeight: FontWeight.w800,
-                                textStyle:
-                                    Theme.of(context).textTheme.subtitle1,
-                              )),
                         ),
                       ],
                     ),
@@ -459,6 +400,7 @@ class _CardoutletState extends State<Cardoutlet> {
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       child: ListView(
+                                        physics: NeverScrollableScrollPhysics(),
                                         shrinkWrap: true,
                                         padding: const EdgeInsets.all(10),
                                         children: [

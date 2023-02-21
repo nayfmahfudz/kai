@@ -190,6 +190,26 @@ lebar(context) {
 //     ),
 //   );
 // }
+Widget search(TextEditingController controller, BuildContext context) {
+  return Container(
+      child: TextFormField(
+    controller: controller,
+    validator: (value) {
+      if (value != null && value.length < 3)
+        return 'Nama Harus diisi minimal 3 kata';
+      else
+        return null;
+    },
+    autofocus: false,
+    decoration: InputDecoration(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      ),
+      hintText: 'Cari Gerbong',
+      contentPadding: EdgeInsets.all(20),
+    ),
+  ));
+}
 
 nama(TextEditingController controller, BuildContext context) {
   return Container(
