@@ -132,10 +132,55 @@ class _CardoutletState extends State<Cardoutlet> {
                                       textStyle:
                                           Theme.of(context).textTheme.subtitle1,
                                     )),
+                                SizedBox(
+                                  height: 15,
+                                ),
                                 Text(
-                                    DateFormat('EEEE, d MMM, yyyy').parse(
-                                            widget.outlet["checked_at"]) ??
+                                    DateFormat('EEEE, d MMM, yyyy.', "id_ID")
+                                            .format(DateTime.parse(
+                                                widget.outlet["checked_at"])) ??
                                         "",
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: biru,
+                                      fontWeight: FontWeight.w800,
+                                      textStyle:
+                                          Theme.of(context).textTheme.subtitle1,
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Column(
+                              children: [
+                                Text('Tanggal Disetujui',
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: biru,
+                                      fontWeight: FontWeight.w800,
+                                      textStyle:
+                                          Theme.of(context).textTheme.subtitle1,
+                                    )),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                    widget.outlet["approved_at"] != null
+                                        ? DateFormat(
+                                                'EEEE, d MMM, yyyy.', "id_ID")
+                                            .format(DateTime.parse(
+                                                widget.outlet["approved_at"]))
+                                        : "",
                                     textAlign: TextAlign.left,
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.roboto(

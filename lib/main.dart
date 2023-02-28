@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:kai/jam.dart';
 import 'package:kai/splashscreen.dart';
 import 'package:dio/dio.dart';
@@ -13,7 +14,7 @@ import 'Login.dart';
 Future<void> main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // await initializeService();
-  runApp(MyApp());
+  initializeDateFormatting('id_ID', null).then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatefulWidget {
