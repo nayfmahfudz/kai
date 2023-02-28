@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:kai/component/clippath.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -85,21 +86,27 @@ class _CardoutletState extends State<Cardoutlet> {
                                 )),
                           ),
                         ),
-                        Expanded(child: SizedBox()),
+                        SizedBox(
+                          width: 25,
+                        ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(6, 6, 0, 6),
-                          child: Text('Menunggu',
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.roboto(
-                                fontSize: 14,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w800,
-                                textStyle:
-                                    Theme.of(context).textTheme.subtitle1,
-                              )),
+                          child:
+                              Text(widget.outlet["checklist_status_name"] ?? "",
+                                  textAlign: TextAlign.left,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w800,
+                                    textStyle:
+                                        Theme.of(context).textTheme.subtitle1,
+                                  )),
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 30,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,16 +120,33 @@ class _CardoutletState extends State<Cardoutlet> {
                         Flexible(
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),
-                            child: Text('',
-                                textAlign: TextAlign.left,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 14,
-                                  color: biru,
-                                  fontWeight: FontWeight.w800,
-                                  textStyle:
-                                      Theme.of(context).textTheme.subtitle1,
-                                )),
+                            child: Column(
+                              children: [
+                                Text('Tanggal Pengecekan',
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: biru,
+                                      fontWeight: FontWeight.w800,
+                                      textStyle:
+                                          Theme.of(context).textTheme.subtitle1,
+                                    )),
+                                Text(
+                                    DateFormat('EEEE, d MMM, yyyy').parse(
+                                            widget.outlet["checked_at"]) ??
+                                        "",
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: biru,
+                                      fontWeight: FontWeight.w800,
+                                      textStyle:
+                                          Theme.of(context).textTheme.subtitle1,
+                                    )),
+                              ],
+                            ),
                           ),
                         ),
                       ],

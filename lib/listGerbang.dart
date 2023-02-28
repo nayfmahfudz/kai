@@ -13,14 +13,14 @@ class ListGerbang extends StatefulWidget {
 
 Future gerbang() async {
   try {
-    var response = await Dio().get(
-        "http://api-kai-qc.arthoize.com/api/v1/carriage-checklist         ",
-        options: Options(headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $key",
-        }));
+    var response = await Dio()
+        .get("http://api-kai-qc.arthoize.com/api/v1/carriage-checklist",
+            options: Options(headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer $key",
+            }));
     print(response);
-    return response.data["data"];
+    return response.data["data"]["data"];
   } catch (e) {
     print(e);
   }
