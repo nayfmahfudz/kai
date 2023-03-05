@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:kai/jam.dart';
 import 'package:kai/splashscreen.dart';
 import 'package:dio/dio.dart';

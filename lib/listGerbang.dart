@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:kai/ceklist.dart';
 import 'package:kai/component/cardoutlet.dart';
 import 'package:kai/component/fom.dart';
 import 'package:kai/setting.dart';
@@ -37,6 +38,9 @@ class _ListGerbangState extends State<ListGerbang> {
       shrinkWrap: true,
       physics: ScrollPhysics(),
       children: [
+        SizedBox(
+          height: 20,
+        ),
         search(searchcontroller, context),
         SizedBox(
           height: 15,
@@ -49,7 +53,10 @@ class _ListGerbangState extends State<ListGerbang> {
                     physics: ScrollPhysics(),
                     itemCount: snapshot.data.length ?? 0,
                     shrinkWrap: true,
-                    itemBuilder: (context, i) => Cardoutlet(snapshot.data[i]));
+                    itemBuilder: (context, i) => GestureDetector(
+                        onTap: () =>
+                            navigateToNextScreen(context, CekList(true)),
+                        child: Cardoutlet(snapshot.data[i])));
               } else
                 return Container();
             })),
