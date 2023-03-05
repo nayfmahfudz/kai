@@ -27,7 +27,7 @@ class LoginState extends State<Login> {
         "password": pass,
       });
       var response = await Dio()
-          .post("http://api-kai-qc.arthoize.com/api/v1/login", data: formData);
+          .post("https://api-kai-qc.arthoize.com/api/v1/login", data: formData);
       print(response.data);
       if (response.data["message"] == "Login success") {
         // berhasil(context, response.data["message"]);
@@ -38,6 +38,7 @@ class LoginState extends State<Login> {
       return false;
     } catch (e) {
       print(e);
+      return false;
     }
   }
 
@@ -75,6 +76,9 @@ class LoginState extends State<Login> {
                                   if (value) {
                                     navigateToNextScreen(
                                         context, ListGerbang());
+                                  } else {
+                                    alarm(context,
+                                        "Password atau Email anda Salah");
                                   }
                                 },
                               );

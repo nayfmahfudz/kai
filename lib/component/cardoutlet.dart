@@ -133,8 +133,9 @@ class _CardoutletState extends State<Cardoutlet> {
                                           Theme.of(context).textTheme.subtitle1,
                                     )),
                                 Text(
-                                    DateFormat('EEEE, d MMM, yyyy').parse(
-                                            widget.outlet["checked_at"]) ??
+                                    DateFormat('EEEE, d MMM, yyyy.', "id_ID")
+                                            .format(DateTime.parse(
+                                                widget.outlet["checked_at"])) ??
                                         "",
                                     textAlign: TextAlign.left,
                                     overflow: TextOverflow.ellipsis,

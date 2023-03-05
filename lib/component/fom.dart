@@ -443,22 +443,22 @@ menuUtama(BuildContext context, String selected, String aktif,
 
 // String hasil;
 
-// void berhasil(BuildContext context) => showDialog(
-//     context: context,
-//     builder: (context) => Center(
-//           child: AlertDialog(
-//             content: Text(
-//               Provider.of<Restapi>(context).getmsg(),
-//               textAlign: TextAlign.center,
-//               style:
-//                   TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
-//             ),
-//             elevation: 3,
-// //                actionsPadding: EdgeInsets.only(right: 28),
+void berhasil(BuildContext context, String text) => showDialog(
+    context: context,
+    builder: (context) => Center(
+          child: AlertDialog(
+            content: Text(
+              text,
+              textAlign: TextAlign.center,
+              style:
+                  TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+            ),
+            elevation: 3,
+//                actionsPadding: EdgeInsets.only(right: 28),
 
-//             actions: <Widget>[okButton],
-//           ),
-//         ));
+            actions: <Widget>[okButton],
+          ),
+        ));
 // void keluar(BuildContext context) => showDialog(
 //     context: context,
 //     builder: (context) => Center(
@@ -486,22 +486,43 @@ menuUtama(BuildContext context, String selected, String aktif,
 //           ),
 //         ));
 
-// alarm(BuildContext context) => showDialog(
-//     context: context,
-//     builder: (context) => Center(
-//           child: AlertDialog(
-//             content: Text(
-//               Provider.of<Restapi>(context).getmsgggl(),
-//               textAlign: TextAlign.center,
-//               style:
-//                   TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
-//             ),
-//             elevation: 3,
-// //                actionsPadding: EdgeInsets.only(right: 28),
-
-//             actions: <Widget>[okButton],
-//           ),
-//         ));
+alarm(BuildContext context, String text) => showDialog(
+    context: context,
+    builder: (context) => Center(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.grey.withOpacity(0.3),
+                    ),
+                    color: putih),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        child: Center(
+                          child: DefaultTextStyle(
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.grey[700],
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                            child: Text(
+                              text,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(child: Center(child: okButton))
+                  ],
+                )),
+          ),
+        ));
 // var keluaryaButton = Builder(
 //   builder: (BuildContext context) => Material(
 //     shadowColor: Color.fromRGBO(237, 155, 12, 1),
@@ -543,27 +564,26 @@ menuUtama(BuildContext context, String selected, String aktif,
 //     ),
 //   ),
 // );
-// var okButton = Builder(
-//   builder: (BuildContext context) => Material(
-//     shadowColor: Color.fromRGBO(237, 155, 12, 1),
-//     child: MaterialButton(
-//       minWidth: 200.0,
-//       height: 42.0,
-//       onPressed: () {
-//         Navigator.pop(context);
-//         Navigator.pop(context);
-//       },
-//       color: Color.fromRGBO(237, 155, 12, 1),
-//       child: Text(
-//         'OK',
-//         style: TextStyle(
-//           color: Colors.white,
-//         ),
-//         textAlign: TextAlign.center,
-//       ),
-//     ),
-//   ),
-// );
+var okButton = Builder(
+  builder: (BuildContext context) => Material(
+    shadowColor: Colors.grey,
+    child: MaterialButton(
+      minWidth: 200.0,
+      height: 42.0,
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      color: biru,
+      child: Text(
+        'OK',
+        style: TextStyle(
+          color: Colors.white,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    ),
+  ),
+);
 // // var gantiButton = Builder(
 // //     builder: (BuildContext context) => Padding(
 // //           padding: EdgeInsets.only(left: 30),

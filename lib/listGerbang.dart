@@ -14,7 +14,7 @@ class ListGerbang extends StatefulWidget {
 Future gerbang() async {
   try {
     var response = await Dio()
-        .get("http://api-kai-qc.arthoize.com/api/v1/carriage-checklist",
+        .get("https://api-kai-qc.arthoize.com/api/v1/carriage-checklist",
             options: Options(headers: {
               "Content-Type": "application/json",
               "Authorization": "Bearer $key",
