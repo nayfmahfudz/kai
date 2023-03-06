@@ -27,6 +27,22 @@ Future gerbang() async {
   }
 }
 
+Future gerbangDetail(id) async {
+  try {
+    print(id);
+    var response = await Dio()
+        .get("https://api-kai-qc.arthoize.com/api/v1/carriage-checklist/${id}",
+            options: Options(headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer $key",
+            }));
+    print(response);
+    return response.data;
+  } catch (e) {
+    print(e);
+  }
+}
+
 var searchcontroller = TextEditingController();
 
 class _ListGerbangState extends State<ListGerbang> {
@@ -54,8 +70,17 @@ class _ListGerbangState extends State<ListGerbang> {
                     itemCount: snapshot.data.length ?? 0,
                     shrinkWrap: true,
                     itemBuilder: (context, i) => GestureDetector(
-                        onTap: () =>
-                            navigateToNextScreen(context, CekList(true)),
+                        onTap: () {
+                          Loading(context);
+                          gerbangDetail(snapshot.data[i]["uuid"]).then(
+                            (value) {
+                              if (value["message"] == "success") {
+                                navigateToNextScreen(context,
+                                    CekList(true, value, snapshot.data[i]));
+                              }
+                            },
+                          );
+                        },
                         child: Cardoutlet(snapshot.data[i])));
               } else
                 return Container();

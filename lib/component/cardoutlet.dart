@@ -52,7 +52,7 @@ class _CardoutletState extends State<Cardoutlet> {
             ListView(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              padding: const EdgeInsets.fromLTRB(16, 16, 36, 16),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
               children: [
                 Text(widget.outlet["name"] ?? "",
                     textAlign: TextAlign.left,
@@ -106,7 +106,7 @@ class _CardoutletState extends State<Cardoutlet> {
                       ],
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,6 +118,7 @@ class _CardoutletState extends State<Cardoutlet> {
                           //     height: 10, fit: BoxFit.contain),
                         ),
                         Flexible(
+                          flex: 5,
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),
                             child: Column(
@@ -126,7 +127,7 @@ class _CardoutletState extends State<Cardoutlet> {
                                     textAlign: TextAlign.left,
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.roboto(
-                                      fontSize: 14,
+                                      fontSize: 12,
                                       color: biru,
                                       fontWeight: FontWeight.w800,
                                       textStyle:
@@ -143,7 +144,7 @@ class _CardoutletState extends State<Cardoutlet> {
                                     textAlign: TextAlign.left,
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.roboto(
-                                      fontSize: 14,
+                                      fontSize: 12,
                                       color: biru,
                                       fontWeight: FontWeight.w800,
                                       textStyle:
@@ -153,10 +154,11 @@ class _CardoutletState extends State<Cardoutlet> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 30,
+                        Expanded(
+                          child: SizedBox(),
                         ),
                         Flexible(
+                          flex: 4,
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),
                             child: Column(
@@ -165,7 +167,7 @@ class _CardoutletState extends State<Cardoutlet> {
                                     textAlign: TextAlign.left,
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.roboto(
-                                      fontSize: 14,
+                                      fontSize: 11,
                                       color: biru,
                                       fontWeight: FontWeight.w800,
                                       textStyle:
@@ -184,7 +186,7 @@ class _CardoutletState extends State<Cardoutlet> {
                                     textAlign: TextAlign.left,
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.roboto(
-                                      fontSize: 14,
+                                      fontSize: 12,
                                       color: biru,
                                       fontWeight: FontWeight.w800,
                                       textStyle:

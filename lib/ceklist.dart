@@ -4,7 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'setting.dart';
 
 class CekList extends StatefulWidget {
-  const CekList(bool edit);
+  CekList(this.edit, this.data, this.gerbong);
+  Map data;
+  Map gerbong;
+  bool edit;
   @override
   State<CekList> createState() => _CekListState();
 }
@@ -45,7 +48,7 @@ class _CekListState extends State<CekList> {
                                         Theme.of(context).textTheme.subtitle1,
                                   )),
                               Expanded(child: SizedBox()),
-                              Text("Kode Gerban dsdg",
+                              Text(widget.gerbong["code"] ?? "",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.roboto(
                                     fontSize: 18,
@@ -60,7 +63,7 @@ class _CekListState extends State<CekList> {
                         Expanded(
                           child: Row(
                             children: [
-                              Text("Tipe Gerbang :",
+                              Text("Nama Gerbang :",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.roboto(
                                     fontSize: 18,
@@ -70,7 +73,7 @@ class _CekListState extends State<CekList> {
                                         Theme.of(context).textTheme.subtitle1,
                                   )),
                               Expanded(child: SizedBox()),
-                              Text("Kode Gerban dsdg",
+                              Text(widget.gerbong["name"] ?? "",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.roboto(
                                     fontSize: 18,
@@ -95,7 +98,7 @@ class _CekListState extends State<CekList> {
                                         Theme.of(context).textTheme.subtitle1,
                                   )),
                               Expanded(child: SizedBox()),
-                              Text("Kode Gerban dsdg",
+                              Text(widget.gerbong["checked_by_user_name"] ?? "",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.roboto(
                                     fontSize: 18,
@@ -126,28 +129,34 @@ class _CekListState extends State<CekList> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: DataTable(
+                      columnSpacing: 7,
+                      showCheckboxColumn: true,
                       border: TableBorder
-                          .all(), // Allows to add a border decoration around your table
+                          .symmetric(), // Allows to add a border decoration around your table
                       columns: [
                         DataColumn(
-                          label: Text('Name'),
+                          label: Expanded(child: Text('No')),
                         ),
                         DataColumn(
-                          label: Text('Baik'),
+                          label: Expanded(child: Text('Name')),
                         ),
                         DataColumn(
-                          label: Expanded(child: Text('Perbaikan')),
+                          label: Center(child: Text('Baik')),
                         ),
                         DataColumn(
-                          label: Text('Catatan'),
+                          label: Center(child: Text('Butuh Perbaikan')),
+                        ),
+                        DataColumn(
+                          label: Center(child: Text('Catatan')),
                         ),
                       ],
                       rows: [
                         DataRow(cells: [
-                          DataCell(Text('1')),
-                          DataCell(Text('Arshik')),
-                          DataCell(Text('5644645')),
-                          DataCell(Text('5644645'))
+                          DataCell(Center(child: Text('1'))),
+                          DataCell(Center(child: Text('1'))),
+                          DataCell(Center(child: Text('Arshik'))),
+                          DataCell(Center(child: Text('5644645'))),
+                          DataCell(Center(child: Text('5644645')))
                         ])
                       ],
                     ),

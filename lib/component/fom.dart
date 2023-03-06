@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kai/fom.dart';
 
 import '../setting.dart';
 
@@ -519,6 +520,33 @@ alarm(BuildContext context, String text) => showDialog(
                       ),
                     ),
                     Expanded(child: Center(child: okButton))
+                  ],
+                )),
+          ),
+        ));
+Loading(BuildContext context) => showDialog(
+    context: context,
+    builder: (context) => Center(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
+                    ),
+                    Expanded(
+                        child: Center(
+                            child: Text(
+                      "Tunggu Sebentar",
+                      style: TextStyle(color: biru),
+                    )))
                   ],
                 )),
           ),
