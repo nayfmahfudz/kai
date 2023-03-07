@@ -3,26 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:kai/ceklist.dart';
 import 'package:kai/component/cardoutlet.dart';
 import 'package:kai/component/fom.dart';
-import 'package:kai/listGerbangNew.dart';
 import 'package:kai/setting.dart';
 
-class ListGerbang extends StatefulWidget {
-  const ListGerbang();
+import 'component/cardGerbongBaru.dart';
+
+class ListGerbangBaru extends StatefulWidget {
+  const ListGerbangBaru();
 
   @override
-  State<ListGerbang> createState() => _ListGerbangState();
+  State<ListGerbangBaru> createState() => _ListGerbangBaruState();
 }
 
 Future gerbang() async {
   try {
-    var response = await Dio()
-        .get("https://api-kai-qc.arthoize.com/api/v1/carriage-checklist",
+    var response =
+        await Dio().get("https://api-kai-qc.arthoize.com/api/v1/carriage",
             options: Options(headers: {
               "Content-Type": "application/json",
               "Authorization": "Bearer $key",
             }));
-    print(response);
-    return response.data["data"]["data"];
+    print(response.data["data"]);
+    return response.data["data"];
   } catch (e) {
     print(e);
   }
@@ -30,7 +31,6 @@ Future gerbang() async {
 
 Future gerbangDetail(id) async {
   try {
-    print(id);
     var response = await Dio()
         .get("https://api-kai-qc.arthoize.com/api/v1/carriage-checklist/${id}",
             options: Options(headers: {
@@ -46,20 +46,24 @@ Future gerbangDetail(id) async {
 
 var searchcontroller = TextEditingController();
 
-class _ListGerbangState extends State<ListGerbang> {
+class _ListGerbangBaruState extends State<ListGerbangBaru> {
   bool hideLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: GestureDetector(
-          onTap: (() => navigateToNextScreen(context, ListGerbangBaru())),
+          onTap: (() => Navigator.of(context).pop()),
           child: Container(
             width: 60,
             height: 60,
-            child: Icon(
-              Icons.add,
-              size: 30,
-              color: biru,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.02),
+              child: Icon(
+                Icons.arrow_back_ios,
+                size: 30,
+                color: biru,
+              ),
             ),
             decoration:
                 BoxDecoration(shape: BoxShape.circle, color: Color(0xFFe0f2f1)),
@@ -91,13 +95,15 @@ class _ListGerbangState extends State<ListGerbang> {
                               gerbangDetail(snapshot.data[i]["uuid"]).then(
                                 (value) {
                                   if (value["message"] == "success") {
-                                    navigateToNextScreen(context,
-                                        CekList(true, value, snapshot.data[i]));
+                                    navigateToNextScreen(
+                                        context,
+                                        CekList(
+                                            false, value, snapshot.data[i]));
                                   }
                                 },
                               );
                             },
-                            child: Cardoutlet(snapshot.data[i])));
+                            child: CardGerbangBaru(snapshot.data[i])));
                   } else
                     return Container();
                 })),

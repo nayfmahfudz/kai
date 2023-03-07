@@ -524,33 +524,36 @@ alarm(BuildContext context, String text) => showDialog(
                 )),
           ),
         ));
-Loading(BuildContext context) => showDialog(
-    context: context,
-    builder: (context) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Container(
-                height: MediaQuery.of(context).size.height * 0.2,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Container(
+Loading(BuildContext context) {
+  Future.delayed(Duration(seconds: 2), () {
+    return Container();
+  });
+  return showDialog(
+      context: context,
+      builder: (context) => Center(
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
                         child: Center(child: CircularProgressIndicator()),
                       ),
-                    ),
-                    Expanded(
-                        child: Center(
-                            child: Text(
-                      "Tunggu Sebentar",
-                      style: TextStyle(color: biru),
-                    )))
-                  ],
-                )),
-          ),
-        ));
+                      Center(
+                          child: Text(
+                        "Tunggu Sebentar",
+                        style: TextStyle(color: biru),
+                      ))
+                    ],
+                  )),
+            ),
+          ));
+}
+
 // var keluaryaButton = Builder(
 //   builder: (BuildContext context) => Material(
 //     shadowColor: Color.fromRGBO(237, 155, 12, 1),

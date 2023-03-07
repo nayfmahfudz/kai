@@ -1,25 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kai/fom.dart';
 
 import 'setting.dart';
 
+// ignore: must_be_immutable
 class CekList extends StatefulWidget {
   CekList(this.edit, this.data, this.gerbong);
   Map data;
   Map gerbong;
   bool edit;
+
   @override
   State<CekList> createState() => _CekListState();
 }
 
 class _CekListState extends State<CekList> {
   @override
+  bool baikValue = false;
+  bool serviceValue = true;
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
             padding: const EdgeInsets.all(15.0),
             child: ListView(shrinkWrap: true, children: [
-              Container(
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
+                  onTap: (() => Navigator.of(context).pop()),
+                  child: Container(
+                    width: 45,
+                    height: 45,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.02),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 30,
+                        color: biru,
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0xFFe0f2f1)),
+                  ),
+                ),
+              ),
+              Expanded(
+                  child: SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.03)),
+              SizedBox(
                 height: MediaQuery.of(context).size.height / 6,
                 child: Card(
                   semanticContainer: true,
@@ -47,7 +76,7 @@ class _CekListState extends State<CekList> {
                                     textStyle:
                                         Theme.of(context).textTheme.subtitle1,
                                   )),
-                              Expanded(child: SizedBox()),
+                              const Expanded(child: SizedBox()),
                               Text(widget.gerbong["code"] ?? "",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.roboto(
@@ -72,7 +101,7 @@ class _CekListState extends State<CekList> {
                                     textStyle:
                                         Theme.of(context).textTheme.subtitle1,
                                   )),
-                              Expanded(child: SizedBox()),
+                              const Expanded(child: SizedBox()),
                               Text(widget.gerbong["name"] ?? "",
                                   textAlign: TextAlign.left,
                                   style: GoogleFonts.roboto(
@@ -85,83 +114,197 @@ class _CekListState extends State<CekList> {
                             ],
                           ),
                         ),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Text("Pengecek :",
-                                  textAlign: TextAlign.left,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 18,
-                                    color: biru,
-                                    fontWeight: FontWeight.w600,
-                                    textStyle:
-                                        Theme.of(context).textTheme.subtitle1,
-                                  )),
-                              Expanded(child: SizedBox()),
-                              Text(widget.gerbong["checked_by_user_name"] ?? "",
-                                  textAlign: TextAlign.left,
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 18,
-                                    color: biru,
-                                    fontWeight: FontWeight.w600,
-                                    textStyle:
-                                        Theme.of(context).textTheme.subtitle1,
-                                  ))
-                            ],
-                          ),
-                        ),
+                        widget.edit
+                            ? Expanded(
+                                child: Row(
+                                  children: [
+                                    Text("Pengecek :",
+                                        textAlign: TextAlign.left,
+                                        style: GoogleFonts.roboto(
+                                          fontSize: 18,
+                                          color: biru,
+                                          fontWeight: FontWeight.w600,
+                                          textStyle: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        )),
+                                    const Expanded(child: SizedBox()),
+                                    Text(
+                                        widget.gerbong[
+                                                "checked_by_user_name"] ??
+                                            "",
+                                        textAlign: TextAlign.left,
+                                        style: GoogleFonts.roboto(
+                                          fontSize: 18,
+                                          color: biru,
+                                          fontWeight: FontWeight.w600,
+                                          textStyle: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1,
+                                        ))
+                                  ],
+                                ),
+                              )
+                            : SizedBox(),
                       ],
                     ),
                   ),
                 ),
               ),
               Container(
-                child: Card(
-                  semanticContainer: true,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: putih.withOpacity(0.7),
-                  shape: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: putih.withOpacity(0),
-                        width: 0.0,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: Card(
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: putih.withOpacity(0.7),
+                    shape: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: putih.withOpacity(0),
+                          width: 0.0,
+                        ),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+                            columnSpacing: 10,
+                            border: TableBorder
+                                .symmetric(), // Allows to add a border decoration around your table
+                            columns: [
+                              DataColumn(
+                                label: Center(child: Text('No')),
+                              ),
+                              DataColumn(
+                                label: Center(child: Text('Name')),
+                              ),
+                              DataColumn(
+                                label: Padding(
+                                    padding: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.05),
+                                    child: Text(
+                                      'Baik',
+                                      textAlign: TextAlign.center,
+                                    )),
+                              ),
+                              DataColumn(
+                                label: Center(child: Text('Butuh Perbaikan')),
+                              ),
+                              DataColumn(
+                                label: Center(child: Text('Catatan')),
+                              ),
+                            ],
+                            rows: [
+                              DataRow(cells: [
+                                DataCell(Center(child: Text('1'))),
+                                DataCell(Center(child: Text('1'))),
+                                DataCell(CheckboxListTile(
+                                  value: baikValue,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      baikValue = newValue;
+                                      serviceValue = !newValue;
+                                    });
+                                  },
+                                  controlAffinity: ListTileControlAffinity
+                                      .leading, //  <-- leading Checkbox
+                                )),
+                                DataCell(Center(
+                                    child: CheckboxListTile(
+                                  value: serviceValue,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      baikValue = !newValue;
+                                      serviceValue = newValue;
+                                    });
+                                  },
+                                  controlAffinity: ListTileControlAffinity
+                                      .leading, //  <-- leading Checkbox
+                                ))),
+                                DataCell(Center(child: Text('5644645')))
+                              ])
+                            ],
+                          ),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DataTable(
-                      columnSpacing: 7,
-                      showCheckboxColumn: true,
-                      border: TableBorder
-                          .symmetric(), // Allows to add a border decoration around your table
-                      columns: [
-                        DataColumn(
-                          label: Expanded(child: Text('No')),
-                        ),
-                        DataColumn(
-                          label: Expanded(child: Text('Name')),
-                        ),
-                        DataColumn(
-                          label: Center(child: Text('Baik')),
-                        ),
-                        DataColumn(
-                          label: Center(child: Text('Butuh Perbaikan')),
-                        ),
-                        DataColumn(
-                          label: Center(child: Text('Catatan')),
-                        ),
-                      ],
-                      rows: [
-                        DataRow(cells: [
-                          DataCell(Center(child: Text('1'))),
-                          DataCell(Center(child: Text('1'))),
-                          DataCell(Center(child: Text('Arshik'))),
-                          DataCell(Center(child: Text('5644645'))),
-                          DataCell(Center(child: Text('5644645')))
-                        ])
-                      ],
                     ),
-                  ),
-                ),
+                  )),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  widget.edit
+                      ? Container(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                            color: Colors.red[300],
+                          ),
+                          child: Center(
+                            child: Text("Tolak",
+                                textAlign: TextAlign.left,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.w600,
+                                  textStyle:
+                                      Theme.of(context).textTheme.subtitle1,
+                                )),
+                          ),
+                        )
+                      : Container(),
+                  Container(width: MediaQuery.of(context).size.width * 0.06),
+                  !widget.edit
+                      ? Container(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                            color: birumuda,
+                          ),
+                          child: Center(
+                            child: Text("Simpan",
+                                textAlign: TextAlign.left,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.w600,
+                                  textStyle:
+                                      Theme.of(context).textTheme.subtitle1,
+                                )),
+                          ),
+                        )
+                      : Container(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                            color: Colors.green[300],
+                          ),
+                          child: Center(
+                            child: Text("Setujui",
+                                textAlign: TextAlign.left,
+                                style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  color: Colors.grey[800],
+                                  fontWeight: FontWeight.w600,
+                                  textStyle:
+                                      Theme.of(context).textTheme.subtitle1,
+                                )),
+                          ),
+                        )
+                ],
               )
             ])));
   }
