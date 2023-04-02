@@ -32,7 +32,7 @@ Future gerbang() async {
 Future gerbangDetail(id) async {
   try {
     var response = await Dio()
-        .get("https://api-kai-qc.arthoize.com/api/v1/carriage-checklist/${id}",
+        .get("https://api-kai-qc.arthoize.com/api/v1/carriage/${id}/items",
             options: Options(headers: {
               "Content-Type": "application/json",
               "Authorization": "Bearer $key",
@@ -94,7 +94,8 @@ class _ListGerbangBaruState extends State<ListGerbangBaru> {
                               Loading(context);
                               gerbangDetail(snapshot.data[i]["uuid"]).then(
                                 (value) {
-                                  if (value["message"] == "success") {
+                                  print(value);
+                                  if (value["messasge"] == "success") {
                                     navigateToNextScreen(
                                         context,
                                         CekList(

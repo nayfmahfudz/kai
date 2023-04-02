@@ -45,9 +45,7 @@ class _CekListState extends State<CekList> {
                   ),
                 ),
               ),
-              Expanded(
-                  child: SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.03)),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.03),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 6,
                 child: Card(
@@ -170,65 +168,171 @@ class _CekListState extends State<CekList> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: DataTable(
-                            columnSpacing: 10,
-                            border: TableBorder
-                                .symmetric(), // Allows to add a border decoration around your table
-                            columns: [
-                              DataColumn(
-                                label: Center(child: Text('No')),
+                              columnSpacing: 10,
+                              border: TableBorder
+                                  .symmetric(), // Allows to add a border decoration around your table
+                              columns: [
+                                DataColumn(
+                                  label: Expanded(
+                                      child: Text(
+                                    'No',
+                                    textAlign: TextAlign.center,
+                                  )),
+                                ),
+                                DataColumn(
+                                  label: Expanded(
+                                      child: Text(
+                                    'Name',
+                                    textAlign: TextAlign.center,
+                                  )),
+                                ),
+                                DataColumn(
+                                  label: Expanded(
+                                      child: Text(
+                                    'Baik',
+                                    textAlign: TextAlign.center,
+                                  )),
+                                ),
+                                DataColumn(
+                                  label: Expanded(
+                                      child: Text(
+                                    'Butuh Perbaikan',
+                                    textAlign: TextAlign.center,
+                                  )),
+                                ),
+                                DataColumn(
+                                  label: Expanded(
+                                      child: Text(
+                                    'Catatan',
+                                    textAlign: TextAlign.center,
+                                  )),
+                                ),
+                              ],
+                              rows: widget.edit == true
+                                  ? widget.data["data"]["items"]
+                                      .map<DataRow>((value) => DataRow(cells: [
+                                            DataCell(Center(child: Text('1'))),
+                                            DataCell(Text(
+                                                value["item_name"].toString(),
+                                                textAlign: TextAlign.left)),
+                                            DataCell(Center(
+                                                child: Text(value[
+                                                        "count_good_condition"]
+                                                    .toString()))),
+                                            DataCell(Center(
+                                                child: Text(
+                                                    value["count_bad_condition"]
+                                                        .toString()))),
+                                            // DataCell(CheckboxListTile(
+                                            //   value: baikValue,
+                                            //   onChanged: (newValue) {
+                                            //     setState(() {
+                                            //       baikValue = newValue;
+                                            //       serviceValue = !newValue;
+                                            //     });
+                                            //   },
+                                            //   controlAffinity: ListTileControlAffinity
+                                            //       .leading, //  <-- leading Checkbox
+                                            // )),
+                                            // DataCell(Center(
+                                            //     child: CheckboxListTile(
+                                            //   value: serviceValue,
+                                            //   onChanged: (newValue) {
+                                            //     setState(() {
+                                            //       baikValue = !newValue;
+                                            //       serviceValue = newValue;
+                                            //     });
+                                            //   },
+                                            //   controlAffinity: ListTileControlAffinity
+                                            //       .leading, //  <-- leading Checkbox
+                                            // ))),
+                                            DataCell(Text(
+                                                value["note"].toString(),
+                                                textAlign: TextAlign.left)),
+                                          ]))
+                                      .toList()
+                                  : widget.data["data"]
+                                      .map<DataRow>((value) => DataRow(cells: [
+                                            DataCell(Center(child: Text('1'))),
+                                            DataCell(Text(
+                                                value["item_name"].toString(),
+                                                textAlign: TextAlign.left)),
+                                            widget.edit == true
+                                                ? DataCell(Center(
+                                                    child: Text(value[
+                                                            "count_good_condition"]
+                                                        .toString())))
+                                                : DataCell(CheckboxListTile(
+                                                    value: baikValue,
+                                                    onChanged: (newValue) {
+                                                      setState(() {
+                                                        baikValue = newValue;
+                                                        serviceValue =
+                                                            !newValue;
+                                                      });
+                                                    },
+                                                    controlAffinity:
+                                                        ListTileControlAffinity
+                                                            .leading, //  <-- leading Checkbox
+                                                  )),
+                                            widget.edit == true
+                                                ? DataCell(Center(
+                                                    child: Text(value[
+                                                            "count_bad_condition"]
+                                                        .toString())))
+                                                : DataCell(Center(
+                                                    child: CheckboxListTile(
+                                                    value: serviceValue,
+                                                    onChanged: (newValue) {
+                                                      setState(() {
+                                                        baikValue = !newValue;
+                                                        serviceValue = newValue;
+                                                      });
+                                                    },
+                                                    controlAffinity:
+                                                        ListTileControlAffinity
+                                                            .leading, //  <-- leading Checkbox
+                                                  ))),
+                                            DataCell(Text(
+                                                value["note"].toString(),
+                                                textAlign: TextAlign.left)),
+                                          ]))
+                                      .toList()
+                              // [
+                              //   DataRow(
+                              //cells: [
+                              //     DataCell(Center(
+                              //         child: Text(widget.data["data"]["items"][0]
+                              //                 ["item_type_name"]
+                              //             .toString()))),
+                              //     DataCell(Center(child: Text('1'))),
+                              //     DataCell(CheckboxListTile(
+                              //       value: baikValue,
+                              //       onChanged: (newValue) {
+                              //         setState(() {
+                              //           baikValue = newValue;
+                              //           serviceValue = !newValue;
+                              //         });
+                              //       },
+                              //       controlAffinity: ListTileControlAffinity
+                              //           .leading, //  <-- leading Checkbox
+                              //     )),
+                              //     DataCell(Center(
+                              //         child: CheckboxListTile(
+                              //       value: serviceValue,
+                              //       onChanged: (newValue) {
+                              //         setState(() {
+                              //           baikValue = !newValue;
+                              //           serviceValue = newValue;
+                              //         });
+                              //       },
+                              //       controlAffinity: ListTileControlAffinity
+                              //           .leading, //  <-- leading Checkbox
+                              //     ))),
+                              //     DataCell(Center(child: Text('5644645')))
+                              //   ])
+                              // ],
                               ),
-                              DataColumn(
-                                label: Center(child: Text('Name')),
-                              ),
-                              DataColumn(
-                                label: Padding(
-                                    padding: EdgeInsets.only(
-                                        left:
-                                            MediaQuery.of(context).size.width *
-                                                0.05),
-                                    child: Text(
-                                      'Baik',
-                                      textAlign: TextAlign.center,
-                                    )),
-                              ),
-                              DataColumn(
-                                label: Center(child: Text('Butuh Perbaikan')),
-                              ),
-                              DataColumn(
-                                label: Center(child: Text('Catatan')),
-                              ),
-                            ],
-                            rows: [
-                              DataRow(cells: [
-                                DataCell(Center(child: Text('1'))),
-                                DataCell(Center(child: Text('1'))),
-                                DataCell(CheckboxListTile(
-                                  value: baikValue,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      baikValue = newValue;
-                                      serviceValue = !newValue;
-                                    });
-                                  },
-                                  controlAffinity: ListTileControlAffinity
-                                      .leading, //  <-- leading Checkbox
-                                )),
-                                DataCell(Center(
-                                    child: CheckboxListTile(
-                                  value: serviceValue,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      baikValue = !newValue;
-                                      serviceValue = newValue;
-                                    });
-                                  },
-                                  controlAffinity: ListTileControlAffinity
-                                      .leading, //  <-- leading Checkbox
-                                ))),
-                                DataCell(Center(child: Text('5644645')))
-                              ])
-                            ],
-                          ),
                         ),
                       ),
                     ),
